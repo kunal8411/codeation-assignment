@@ -1,5 +1,6 @@
 import React from 'react';
 import Profile from '../profile/profile.component';
+import Repos from '../show-repos/repos.component'
 import Axios from 'axios'
 class SearchBox extends React.Component{
     constructor(){
@@ -7,7 +8,7 @@ class SearchBox extends React.Component{
         this.state={
             username:"",
             profile:null,
-            repos:""
+            repos:null
         }
     }
 
@@ -19,6 +20,7 @@ class SearchBox extends React.Component{
     searchUser=(e)=>{
         e.preventDefault();
         this.searchProfile();
+        this.searchRepos();
     }
     searchProfile=()=>{
         Axios.get(`https://api.github.com/users/${this.state.username}`)
@@ -30,6 +32,15 @@ class SearchBox extends React.Component{
         })
     }
 
+    searchRepos=()=>{
+        Axios.get(`https://api.github.com/users/${this.state.username}/repos`)
+        .then(response=>{
+            this.setState({repos:response.data})
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
     render(){
         console.log(this.state)
         return(
@@ -79,6 +90,21 @@ class SearchBox extends React.Component{
                         </div>
                     </div>
                 </div>
+
+                <div className="container mt-3">
+                    <div className="row">
+                        <div className="col">
+                            {
+                                this.state.repos
+                                 ? 
+                                <Repos repos={this.state.repos}/>
+                                :
+                                null
+                            }
+                        </div>
+                    </div>
+                </div>            
+
             </div>
         )
     }
