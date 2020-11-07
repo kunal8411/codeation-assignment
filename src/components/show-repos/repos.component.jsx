@@ -25,6 +25,7 @@ class Repos extends React.Component{
                                              <a href={repo.html_url}>{repo.name}</a>
                                             <span className="badge badge-success mx-5">{repo.stargazers_count}Stars</span>
                                             <span className="badge badge-warning mx-5">{repo.watchers_count}Watches</span>
+                                            <span className="badge badge-primary mx-5">{repo.forks_count}Forks</span>
                                         </li>
 
                                     )
