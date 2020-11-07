@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+.bg-secondary{
+  background: linear-gradient(45deg, darkslategrey, purple);
+}
